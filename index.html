@@ -7,14 +7,19 @@
     body {
       background-color: #FFFFFF;
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
     }
-    h1 {
-      font-size: 48px;
-      margin-top: 0;
-      padding: 40px 0;
+    .titulo {
       background-color: #6A0DAD;
+      padding: 30px;
+      display: flex;
+      align-items: center;
+    }
+    .titulo h1 {
+      font-size: 36px;
       color: #98FFDC;
-      text-align: center;
+      margin: 0;
     }
     h2, p {
       color: #98FFDC;
@@ -42,19 +47,21 @@
       background-color: #6A0DAD;
     }
     .correccion {
-      border: 2px solid #6A0DAD;
+      background-color: #4B0082;
     }
   </style>
 </head>
 <body>
 
-  <h1>SOVYX 
-    segmentación de audiencia, corrección y meta</h1>
+  <!-- Título fijo arriba a la izquierda -->
+  <div class="titulo">
+    <h1>SOVYX</h1>
+  </div>
 
   <!-- Fase 1: Activación cápsula -->
   <section id="activacion" class="seccion activacion">
     <h2>Activar cápsula</h2>
-    <button onclick="mostrarLogin()"> Activar vía Instagram</button>
+    <button onclick="mostrarLogin()">👉 Activar vía Instagram</button>
     <div id="login" style="margin-top:30px; display:none;">
       <form id="loginForm">
         <input type="text" name="usuario" placeholder="Usuario de Instagram" required />
@@ -110,36 +117,43 @@
       };
 
       const usuario = localStorage.getItem('sovyx_user');
-      let caption = "Este post activa autoridad editorial.";
+      let tipoPost = "Post editorial";
       const niche = data.niche.toLowerCase();
       if (niche.includes("odontología")) {
-        caption = "¿Tus pacientes no confían en tu marca? Este reel corrige eso.";
+        tipoPost = "Reel de corrección";
       }
       if (niche.includes("fitness")) {
-        caption = "¿Tu comunidad no paga lo que vale tu transformación? Este carrusel lo corrige.";
+        tipoPost = "Carrusel de transformación";
       }
       if (niche.includes("tech") || niche.includes("tecnología")) {
-        caption = "¿Tu software no cierra clientes high ticket? Este post activa autoridad editorial.";
+        tipoPost = "Post de autoridad editorial";
       }
 
       let resultado = "";
       if (data.price < 1000) {
         resultado = `
-          <h2>⚠️ Corrección necesaria</h2>
-          <p>Tu producto está por debajo del rango high ticket (€1.000+).</p>
-          <p>Activa una cápsula de corrección para escalar tu oferta.</p>
+          <h2 style="color:#98FFDC;">⚠️ Corrección necesaria</h2>
+          <p style="color:#98FFDC;">Tu producto está por debajo del rango high ticket (€1.000+).</p>
+          <p style="color:#98FFDC;">Activa una cápsula de corrección para escalar tu oferta.</p>
         `;
       } else {
         const cierreNecesario = Math.ceil(data.goal / data.price);
         const cierrePorDia = Math.ceil(cierreNecesario / data.days);
+        const conversionPorPost = 500; // 1% de 50.000
+        const postsNecesarios = Math.ceil(cierreNecesario / conversionPorPost);
+
         resultado = `
-          <h2>Análisis editorial</h2>
-          <p><strong>Instagram:</strong> ${usuario}</p>
-          <p><strong>Producto:</strong> ${data.product}</p>
-          <p><strong>Nicho:</strong> ${data.niche}</p>
-          <p><strong>Caption:</strong> ${caption}</p>
-          <p><strong>Cierre necesario:</strong> ${cierreNecesario} clientes</p>
-          <p><strong>Cierre diario estimado:</strong> ${cierrePorDia} clientes/día</p>
+          <h2 style="color:#98FFDC;">Análisis editorial</h2>
+          <p style="color:#98FFDC;"><strong>Instagram:</strong> ${usuario}</p>
+          <p style="color:#98FFDC;"><strong>Producto:</strong> ${data.product}</p>
+          <p style="color:#98FFDC;"><strong>Nicho:</strong> ${data.niche}</p>
+          <p style="color:#98FFDC;"><strong>Post sugerido:</strong> ${tipoPost}</p>
+          <p style="color:#98FFDC;"><strong>Clientes reales necesarios:</strong> ${cierreNecesario}</p>
+          <p style="color:#98FFDC;"><strong>Posts estimados (1% conversión):</strong> ${postsNecesarios}</p>
+          <p style="color:#98FFDC;"><strong>Cierre diario estimado:</strong> ${cierrePorDia} clientes/día</p>
+          <hr style="border-color:#98FFDC;">
+          <p style="color:#98FFDC;">Estado actual: tu cápsula está en fase de corrección.</p>
+          <p style="color:#98FFDC;">Recibirás análisis simbólico en 24H basado en estadísticas reales.</p>
         `;
       }
 
