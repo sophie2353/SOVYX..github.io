@@ -1,164 +1,4 @@
-[17:41, 10/27/2025] S: <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>SOVYX</title>
-  <style>
-    body {
-      background-color: #FFFFFF;
-      font-family: Arial, sans-serif;
-    }
-    h1 {
-      color: #98FFDC;
-      background-color: #6A0DAD;
-      text-align: center;
-      font-size: 48px;
-      margin-top: 0;
-      padding: 40px 0;
-    }
-    h2, p {
-      color: #98FFDC;
-      text-align: center;
-    }
-    input, button {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 20px;
-      border: none;
-      border-radius: 6px;
-    }
-    button {
-      background-color: #98FFDC;
-      color: #6A0DAD;
-      font-weight: bold;
-    }
-    .seccion {
-      margin: 40px auto;
-      width: 80%;
-      padding: 30px;
-      border-radius: 12px;
-    }
-    .activacion {
-      background-color: #6A0DAD;
-    }
-    .correccion {
-      border: 2px solid #6A0DAD;
-    }
-  </style>
-</head>
-<body>
-
-  <h1>SOVYX</h1>
-  <p style="font-size:18px;">Cápsula editorial predictiva. Corrige, documenta y muta.</p>
-
-  <!-- Activación Meta -->
-  <div class="seccion activacion">
-    <h2>Activa tu cápsula editorial</h2>
-    <p>Este prompt conecta tu cápsula con Instagram Insights:</p>
-    <a href="https://www.facebook.com/v18.0/dialog/oauth?client_id=TU_APP_ID&redirect_uri=https://sophie2353.github.io/sovyx.github.io/&scope=instagram_basic,instagram_manage_insights,pages_read_engagement" target="_blank" style="color:#FFFFFF; font-weight:bold;">
-      👉 Activar cápsula vía Instagram
-    </a>
-  </div>
-
-  <!-- Registro -->
-  <section id="registro" class="seccion correccion">
-    <h2>Registro editorial</h2>
-    <form id="registroForm">
-      <input type="text" name="usuario" placeholder="Usuario de Instagram" required />
-      <button type="submit">Entrar</button>
-    </form>
-  </section>
-
-  <!-- Formulario predictivo -->
-  <section id="formulario" class="seccion activacion" style="display:none;">
-    <h2>Simulación editorial</h2>
-    <form id="capsulaForm">
-      <input type="text" name="product" placeholder="Producto" required />
-      <input type="number" name="price" placeholder="Precio (€)" required />
-      <input type="text" name="niche" placeholder="Nicho" required />
-      <input type="text" name="audience" placeholder="Audiencia" required />
-      <input type="number" name="goal" placeholder="Meta (€)" required />
-      <input type="number" name="days" placeholder="Tiempo (días)" required />
-      <button type="submit">Activar cápsula</button>
-    </form>
-  </section>
-
-  <!-- Resultado -->
-  <section id="respuesta" class="seccion correccion" style="display:none;"></section>
-
-  <script>
-    // Detección de usuario
-    const nombreUsuario = localStorage.getItem('sovyx_user');
-    if (nombreUsuario) {
-      document.getElementById('registro').style.display = 'none';
-      document.getElementById('formulario').style.display = 'block';
-    }
-
-    // Registro
-    document.getElementById('registroForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const form = e.target;
-      const nombre = form.usuario.value;
-      localStorage.setItem('sovyx_user', nombre);
-      document.getElementById('registro').style.display = 'none';
-      document.getElementById('formulario').style.display = 'block';
-    });
-
-    // Activación cápsula (simulada)
-    document.getElementById('capsulaForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const form = e.target;
-      const data = {
-        product: form.product.value,
-        price: parseFloat(form.price.value),
-        niche: form.niche.value,
-        audience: form.audience.value,
-        goal: parseFloat(form.goal.value),
-        days: parseInt(form.days.value)
-      };
-
-      if (data.price < 1000) {
-        document.getElementById('respuesta').style.display = 'block';
-        document.getElementById('respuesta').innerHTML = `
-          <h2>⚠️ Corrección necesaria</h2>
-          <p>Tu producto está por debajo del rango high ticket (€1.000+).</p>
-          <p>Activa una cápsula de corrección para escalar tu oferta.</p>
-        `;
-        return;
-      }
-
-      const cierreNecesario = Math.ceil(data.goal / data.price);
-      const cierrePorDia = Math.ceil(cierreNecesario / data.days);
-      const nombre = localStorage.getItem('sovyx_user');
-
-      let caption = "Este post activa autoridad editorial.";
-      const niche = data.niche.toLowerCase();
-      if (niche.includes("odontología")) {
-        caption = "¿Tus pacientes no confían en tu marca? Este reel corrige eso.";
-      }
-      if (niche.includes("fitness")) {
-        caption = "¿Tu comunidad no paga lo que vale tu transformación? Este carrusel lo corrige.";
-      }
-      if (niche.includes("tech") || niche.includes("tecnología")) {
-        caption = "¿Tu software no cierra clientes high ticket? Este post activa autoridad editorial.";
-      }
-
-      document.getElementById('respuesta').style.display = 'block';
-      document.getElementById('respuesta').innerHTML = `
-        <h2>Corrección Predictiva</h2>
-        <p><strong>Instagram:</strong> ${nombre}</p>
-        <p><strong>Producto:</strong> ${data.product}</p>
-        <p><strong>Nicho:</strong> ${data.niche}</p>
-        <p><strong>Caption:</strong> ${caption}</p>
-        <p><strong>Cierre necesario:</strong> ${cierreNecesario} clientes</p>
-        <p><strong>Cierre diario estimado:</strong> ${cierrePorDia} clientes/día</p>
-      `;
-    });
-  </script>
-
-</body>
-</html>
-[17:56, 10/27/2025] S: <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -210,19 +50,22 @@
 
   <h1>SOVYX — segmentación de audiencia, corrección y meta</h1>
 
-  <!-- Activación cápsula -->
+  <!-- Fase 1: Activación cápsula -->
   <section id="activacion" class="seccion activacion">
     <h2>Activar cápsula</h2>
-    <form id="loginForm">
-      <input type="text" name="usuario" placeholder="Usuario de Instagram" required />
-      <input type="password" name="clave" placeholder="Contraseña" required />
-      <button type="submit">Activar cápsula</button>
-    </form>
+    <button onclick="mostrarLogin()">👉 Activar vía Instagram</button>
+    <div id="login" style="margin-top:30px; display:none;">
+      <form id="loginForm">
+        <input type="text" name="usuario" placeholder="Usuario de Instagram" required />
+        <input type="password" name="clave" placeholder="Contraseña" required />
+        <button type="submit">Entrar</button>
+      </form>
+    </div>
   </section>
 
-  <!-- Formulario predictivo -->
+  <!-- Fase 2: Formulario predictivo -->
   <section id="formulario" class="seccion activacion" style="display:none;">
-    <h2>Formulario editorial</h2>
+    <h2>Simulación editorial</h2>
     <form id="capsulaForm">
       <input type="text" name="product" placeholder="Producto" required />
       <input type="number" name="price" placeholder="Precio (€)" required />
@@ -234,10 +77,14 @@
     </form>
   </section>
 
-  <!-- Análisis predictivo -->
+  <!-- Fase 3: Análisis editorial -->
   <section id="respuesta" class="seccion correccion" style="display:none;"></section>
 
   <script>
+    function mostrarLogin() {
+      document.getElementById('login').style.display = 'block';
+    }
+
     // Activación cápsula
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -261,20 +108,7 @@
         days: parseInt(form.days.value)
       };
 
-      if (data.price < 1000) {
-        document.getElementById('respuesta').style.display = 'block';
-        document.getElementById('respuesta').innerHTML = `
-          <h2>⚠️ Corrección necesaria</h2>
-          <p>Tu producto está por debajo del rango high ticket (€1.000+).</p>
-          <p>Activa una cápsula de corrección para escalar tu oferta.</p>
-        `;
-        return;
-      }
-
-      const cierreNecesario = Math.ceil(data.goal / data.price);
-      const cierrePorDia = Math.ceil(cierreNecesario / data.days);
       const usuario = localStorage.getItem('sovyx_user');
-
       let caption = "Este post activa autoridad editorial.";
       const niche = data.niche.toLowerCase();
       if (niche.includes("odontología")) {
@@ -287,16 +121,30 @@
         caption = "¿Tu software no cierra clientes high ticket? Este post activa autoridad editorial.";
       }
 
+      let resultado = "";
+      if (data.price < 1000) {
+        resultado = `
+          <h2>⚠️ Corrección necesaria</h2>
+          <p>Tu producto está por debajo del rango high ticket (€1.000+).</p>
+          <p>Activa una cápsula de corrección para escalar tu oferta.</p>
+        `;
+      } else {
+        const cierreNecesario = Math.ceil(data.goal / data.price);
+        const cierrePorDia = Math.ceil(cierreNecesario / data.days);
+        resultado = `
+          <h2>Análisis editorial</h2>
+          <p><strong>Instagram:</strong> ${usuario}</p>
+          <p><strong>Producto:</strong> ${data.product}</p>
+          <p><strong>Nicho:</strong> ${data.niche}</p>
+          <p><strong>Caption:</strong> ${caption}</p>
+          <p><strong>Cierre necesario:</strong> ${cierreNecesario} clientes</p>
+          <p><strong>Cierre diario estimado:</strong> ${cierrePorDia} clientes/día</p>
+        `;
+      }
+
+      document.getElementById('formulario').style.display = 'none';
       document.getElementById('respuesta').style.display = 'block';
-      document.getElementById('respuesta').innerHTML = `
-        <h2>Análisis editorial</h2>
-        <p><strong>Instagram:</strong> ${usuario}</p>
-        <p><strong>Producto:</strong> ${data.product}</p>
-        <p><strong>Nicho:</strong> ${data.niche}</p>
-        <p><strong>Caption:</strong> ${caption}</p>
-        <p><strong>Cierre necesario:</strong> ${cierreNecesario} clientes</p>
-        <p><strong>Cierre diario estimado:</strong> ${cierrePorDia} clientes/día</p>
-      `;
+      document.getElementById('respuesta').innerHTML = resultado;
     });
   </script>
 
