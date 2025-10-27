@@ -8,7 +8,15 @@
       background-color: #FFFFFF;
       font-family: Arial, sans-serif;
     }
-    h1, h2, p {
+    h1 {
+      color: #98FFDC;
+      background-color: #6A0DAD;
+      text-align: center;
+      font-size: 48px;
+      margin-top: 0;
+      padding: 40px 0;
+    }
+    h2, p {
       color: #98FFDC;
       text-align: center;
     }
@@ -40,31 +48,30 @@
 </head>
 <body>
 
-  <h1 style="font-size:48px; margin-top:40px;">SOVYX</h1>
+  <h1>SOVYX</h1>
   <p style="font-size:18px;">Cápsula editorial predictiva. Corrige, documenta y muta.</p>
 
   <!-- Activación Meta -->
   <div class="seccion activacion">
     <h2>Activa tu cápsula editorial</h2>
-    <p>Este enlace activa los permisos <strong>instagram_basic</strong> y <strong>instagram_manage_insights</strong>:</p>
+    <p>Este prompt conecta tu cápsula con Instagram Insights:</p>
     <a href="https://www.facebook.com/v18.0/dialog/oauth?client_id=TU_APP_ID&redirect_uri=https://sophie2353.github.io/sovyx.github.io/&scope=instagram_basic,instagram_manage_insights,pages_read_engagement" target="_blank" style="color:#FFFFFF; font-weight:bold;">
-      Activar vía Facebook
+      👉 Activar cápsula vía Instagram
     </a>
   </div>
 
   <!-- Registro -->
   <section id="registro" class="seccion correccion">
-    <h2>Acceso simbólico</h2>
+    <h2>Registro editorial</h2>
     <form id="registroForm">
-      <input type="text" name="usuario" placeholder="Tu nombre o alias" required />
-      <input type="email" name="correo" placeholder="Correo electrónico" required />
-      <button type="submit">Ingresar</button>
+      <input type="text" name="usuario" placeholder="Usuario de Instagram" required />
+      <button type="submit">Entrar</button>
     </form>
   </section>
 
   <!-- Formulario predictivo -->
   <section id="formulario" class="seccion activacion" style="display:none;">
-    <h2>Análisis, Corrección y Simulación</h2>
+    <h2>Simulación editorial</h2>
     <form id="capsulaForm">
       <input type="text" name="product" placeholder="Producto" required />
       <input type="number" name="price" placeholder="Precio (€)" required />
@@ -111,7 +118,12 @@
       };
 
       if (data.price < 1000) {
-        alert("Tu producto está por debajo del rango high ticket (€1.000+). ¿Quieres activar una cápsula de corrección para escalar tu oferta?");
+        document.getElementById('respuesta').style.display = 'block';
+        document.getElementById('respuesta').innerHTML = `
+          <h2>⚠️ Corrección necesaria</h2>
+          <p>Tu producto está por debajo del rango high ticket (€1.000+).</p>
+          <p>Activa una cápsula de corrección para escalar tu oferta.</p>
+        `;
         return;
       }
 
@@ -134,7 +146,7 @@
       document.getElementById('respuesta').style.display = 'block';
       document.getElementById('respuesta').innerHTML = `
         <h2>Corrección Predictiva</h2>
-        <p><strong>Usuario:</strong> ${nombre}</p>
+        <p><strong>Instagram:</strong> ${nombre}</p>
         <p><strong>Producto:</strong> ${data.product}</p>
         <p><strong>Nicho:</strong> ${data.niche}</p>
         <p><strong>Caption:</strong> ${caption}</p>
