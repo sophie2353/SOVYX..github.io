@@ -88,6 +88,9 @@
   <!-- Fase 3: Análisis editorial -->
   <section id="respuesta" class="seccion correccion" style="display:none;"></section>
 
+  <!-- Fase 4: Estadísticas simuladas -->
+  <section id="estadisticas" class="seccion correccion" style="display:none;"></section>
+
   <script>
     function mostrarLogin() {
       document.getElementById('login').style.display = 'block';
@@ -139,7 +142,7 @@
       } else {
         const cierreNecesario = Math.ceil(data.goal / data.price);
         const cierrePorDia = Math.ceil(cierreNecesario / data.days);
-        const conversionPorPost = 500; // 1% de 50.000
+        const conversionPorPost = 500;
         const postsNecesarios = Math.ceil(cierreNecesario / conversionPorPost);
 
         resultado = `
@@ -151,9 +154,9 @@
           <p style="color:#98FFDC;"><strong>Clientes reales necesarios:</strong> ${cierreNecesario}</p>
           <p style="color:#98FFDC;"><strong>Posts estimados (1% conversión):</strong> ${postsNecesarios}</p>
           <p style="color:#98FFDC;"><strong>Cierre diario estimado:</strong> ${cierrePorDia} clientes/día</p>
+          <p style="color:#98FFDC;">Si tienes ${data.days} días y quieres cerrar €${data.goal}, necesitas ${cierrePorDia} clientes/día porque cada cliente aporta €${data.price}.</p>
           <hr style="border-color:#98FFDC;">
-          <p style="color:#98FFDC;">Estado actual: tu cápsula está en fase de corrección.</p>
-          <p style="color:#98FFDC;">Recibirás análisis simbólico en 24H basado en estadísticas reales.</p>
+          <button onclick="mostrarEstadisticas()">Siguiente</button>
         `;
       }
 
@@ -161,6 +164,22 @@
       document.getElementById('respuesta').style.display = 'block';
       document.getElementById('respuesta').innerHTML = resultado;
     });
+
+    function mostrarEstadisticas() {
+      const usuario = localStorage.getItem('sovyx_user');
+      const contenido = `
+        <h2 style="color:#98FFDC;">Estadísticas simbólicas</h2>
+        <p style="color:#98FFDC;"><strong>Instagram:</strong> ${usuario}</p>
+        <p style="color:#98FFDC;">Fallos detectados: baja frecuencia, captions poco claros, engagement irregular</p>
+        <p style="color:#98FFDC;">Comentarios recientes: “No entiendo tu oferta”, “¿Qué vendes?”, “¿Esto es para mí?”</p>
+        <p style="color:#98FFDC;">Corrección sugerida: usar captions con autoridad, claridad y cierre emocional</p>
+        <p style="color:#98FFDC;">Tu cápsula está conectada simbólicamente a Meta. Cuando insertes tu App ID, se activa la conexión real.</p>
+        <p style="color:#98FFDC;">Recibirás análisis simbólico en 24H basado en estadísticas reales.</p>
+      `;
+      document.getElementById('respuesta').style.display = 'none';
+      document.getElementById('estadisticas').style.display = 'block';
+      document.getElementById('estadisticas').innerHTML = contenido;
+    }
   </script>
 
 </body>
